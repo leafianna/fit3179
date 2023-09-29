@@ -1,37 +1,39 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "TB Fatality Rate (%)",
-    "width": 800,
-    "height": 400,
-    "projection": {"type": "equalEarth"},
-    "data": {
-      "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
-      "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
-    },
-    "transform": [
-      {
-        "lookup": "properties.NAME",
-        "from": {
-          "data": {
-            "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/TB_burden_countries_2023-09-28.csv"
-          },
-          "key": "country",
-          "fields": ["cfr_pct"]
-        }
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Tuberculosis Fatality Rate (%)",
+  "width": 800,
+  "height": 400,
+  "projection": {"type": "equalEarth"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.NAME",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/TB_burden_countries_2023-09-28.csv"
+        },
+        "key": "country",
+        "fields": ["cfr_pct"]
       }
-    ],
-    "mark": {"type": "geoshape"},
-    "encoding": {
-      "color": {
-        "field": "cfr_pct",
-        "type": "quantitative"
-      },
-      "tooltip": [
-        {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-        {"field": "cfr_pct", "type": "quantitative", "title": "Fatality Rate (%)"} // Customize the title as needed
-      ]
     }
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "cfr_pct",
+      "type": "quantitative",
+      "title": "Rate (%)" // Updated field title
+    },
+    "tooltip": [
+      {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+      {"field": "cfr_pct", "type": "quantitative", "title": "Fatality Rate (%)", "format": ".1r"} // Added format for percentage display
+    ]
   }
+}
+
 
 // {
 //     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
