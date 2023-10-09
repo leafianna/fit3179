@@ -2,14 +2,54 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 800,
   "height": 600,
-  "title": "COVID-19 Cases per Country (13 Oct 2020)",
+  "title": "TB Cases per Country (2021)",
   "data": {
     "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/merged_data2.csv"
   },
+  "params": [
+    {
+      "name": "Continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "labels": [
+          "Show All",
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "name": "Continent Selection: "
+      }
+    },
+    {
+      "name": "Population_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100000000,
+        "step": 1000000,
+        "name": "Minimum Population: "
+      }
+    }
+  ],
   "transform": [
     {"filter": "datum.e_inc_num > 0"},
     {"filter": "datum.e_mort_num > 0"},
-    {"filter": "datum.year == 2020"}
+    {"filter": "datum.year == 2021"},
+    {"filter": "Continent_selection == null || datum.Continent == Continent_selection"},
+    {"filter": "datum.Population > Population_Above"}
   ],
   "encoding": {
     "x": {
@@ -57,7 +97,14 @@
           "#a65628"
         ]
       }
-    }
+    },
+    "opacity": {"value": 0.6},
+    "tooltip": [
+      {"field": "country", "type": "nominal"},
+      {"field": "e_pop_num", "type": "quantitative", "title": "Population"},
+      {"field": "e_inc_num", "type": "quantitative", "title": "New Cases"},
+      {"field": "e_mort_num", "type": "quantitative", "title": "Deaths"}
+    ]
   },
   "mark": {
     "type": "circle",
