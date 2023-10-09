@@ -55,6 +55,10 @@
 
   <div id="bubble_chart" class="vis-container"></div>
 
+
+
+  <div id="line_graph" class="vis-container"></div>
+
   <!-- <script src="vis1.js"></script> -->
 
   <!-- <script type="text/javascript">
@@ -77,12 +81,17 @@
   <script type="text/javascript">
     var specVis1 = "Graph1.json";
     var specVis2 = "Graph2.json";
+    var specVis3 = "Graph3.json";
 
   vegaEmbed('#fatality_map', specVis1, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
     vegaEmbed('#bubble_chart', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#line_graph', specVis3, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
