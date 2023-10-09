@@ -1,0 +1,24 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 600,
+    "title": "Tuberculosis Incidence Over Time by Continent",
+    "data": {
+      "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/incidence_con.csv",
+      "format": {
+        "type": "csv"
+      }
+    },
+    "mark": "line",
+    "encoding": {
+      "x": {"field": "Year.x", "type": "temporal", "title": "Year"},
+      "y": {"field": "Incidence.of.tuberculosis..per.100.000.people.", "type": "quantitative", "title": "Incidence per 100,000 people"},
+      "color": {"field": "Continent", "type": "nominal", "title": "Continent"}
+    },
+    "config": {
+      "axis": {
+        "grid": false
+      }
+    }
+  }
+  
