@@ -11,6 +11,9 @@
     <!-- Import pure.css -->
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
     integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -52,27 +55,27 @@
       <div id="graph1" class="graph">
           <div id="fatality_map" class="vis-container">
               <!-- Your content for the first graph here -->
-              <h2>Graph 1</h2>
+              <h2>Fatality Rate</h2>
           </div>
       </div>
       <div id="graph2" class="graph" style="display: none;">
           <div id="incident_map" class="vis-container">
               <!-- Your content for the second graph here -->
-              <h2>Graph 2</h2>
+              <h2>Incidences</h2>
           </div>
       </div>
       <div id="graph3" class="graph" style="display: none;">
-          <div id="line_graph" class="vis-container">
+          <div id="death_map" class="vis-container">
               <!-- Your content for the third graph here -->
-              <h2>Graph 3</h2>
+              <h2>Deaths</h2>
           </div>
       </div>
   </div>
 
   <div>
-      <button onclick="showGraph(1)">Graph 1</button>
-      <button onclick="showGraph(2)">Graph 2</button>
-      <button onclick="showGraph(3)">Graph 3</button>
+      <button onclick="showGraph(1)">Fatality Rate</button>
+      <button onclick="showGraph(2)">Incidences</button>
+      <button onclick="showGraph(3)">Deaths</button>
   </div>
 
     
@@ -97,7 +100,19 @@
 
 
 
-  <div id="line_graph" class="vis-container"></div>
+  <!-- <div id="line_graph" class="vis-container"></div> -->
+  <div class="pure-g">
+    <div class="pure-u-1 pure-u-md-2-3">
+      <div id="line_graph" class="vis-container"></div>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-3">
+      <div class="description description-left">
+        <h2>Lorem Ipsum</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- <script src="vis1.js"></script> -->
 
@@ -107,12 +122,17 @@
     var specVis3 = "Graph3.json";
 
     var specVis1_5 = "Graph11.json";
+    var specVis1_6 = "Graph12.json";
 
   vegaEmbed('#fatality_map', specVis1, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
     vegaEmbed('#incident_map', specVis1_5, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#death_map', specVis1_6, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
