@@ -16,6 +16,16 @@
 
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 
+  <script>
+    function showGraph(n) {
+        var graphs = document.getElementsByClassName('graph');
+        for (var i = 0; i < graphs.length; i++) {
+            graphs[i].style.display = 'none';
+        }
+        document.getElementById('graph' + n).style.display = 'block';
+    }
+</script>
+
 
   <!-- <title>Tuberculosis Fatality Rate Chart</title> -->
 
@@ -37,7 +47,33 @@
       </div>
     </div>
 
-    <div id="fatality_map" class="vis-container"></div>
+    <!-- <div id="fatality_map" class="vis-container"></div> -->
+    <div id="carousel">
+      <div id="graph1" class="graph">
+          <div id="fatality_map" class="vis-container">
+              <!-- Your content for the first graph here -->
+              <h2>Graph 1</h2>
+          </div>
+      </div>
+      <div id="graph2" class="graph" style="display: none;">
+          <div id="incident_map" class="vis-container">
+              <!-- Your content for the second graph here -->
+              <h2>Graph 2</h2>
+          </div>
+      </div>
+      <div id="graph3" class="graph" style="display: none;">
+          <div id="line_graph" class="vis-container">
+              <!-- Your content for the third graph here -->
+              <h2>Graph 3</h2>
+          </div>
+      </div>
+  </div>
+
+  <div>
+      <button onclick="showGraph(1)">Graph 1</button>
+      <button onclick="showGraph(2)">Graph 2</button>
+      <button onclick="showGraph(3)">Graph 3</button>
+  </div>
 
     
     <div><h2>TB Fatality</h2></div>
@@ -57,7 +93,7 @@
     </div>
   </div>
 
-  <div id="bubble_chart" class="vis-container"></div>
+  <!-- <div id="bubble_chart" class="vis-container"></div> -->
 
 
 
@@ -65,29 +101,18 @@
 
   <!-- <script src="vis1.js"></script> -->
 
-  <!-- <script type="text/javascript">
-    var specVis1 = "Assign2\Graph1.json";
-    var specVis2 = "Assign2\Graph2.json";
-
-    vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
-
-    vegaEmbed('#vis3', specVis1, { "actions": false }).then(function (result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
-
-    vegaEmbed('#vis4', specVis2, { "actions": false }).then(function (result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
-  </script> -->
-
   <script type="text/javascript">
     var specVis1 = "Graph1.json";
     var specVis2 = "Graph2.json";
     var specVis3 = "Graph3.json";
 
+    var specVis1_5 = "Graph11.json";
+
   vegaEmbed('#fatality_map', specVis1, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#incident_map', specVis1_5, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
@@ -98,6 +123,8 @@
     vegaEmbed('#line_graph', specVis3, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
+
+
 
   </script>
 

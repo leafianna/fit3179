@@ -1,0 +1,34 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/deaths_con_merged.csv",
+      "format": {
+        "type": "csv"
+      }
+    },
+    "transform": [
+      {
+        "aggregate": [{"op": "sum", "field": "Deaths", "as": "Total_Deaths"}],
+        "groupby": ["Continent", "Year"]
+      }
+    ],
+    "facet": {
+      "row": {"field": "Continent", "type": "nominal"}
+    },
+    "spec": {
+      "encoding": {
+        "x": {"field": "Year", "type": "temporal", "axis": {"title": "Year"}},
+        "y": {"field": "Total_Deaths", "type": "quantitative", "axis": {"title": "Total Deaths"}},
+        "color": {"field": "Continent", "type": "nominal", "title": "Continent"}
+      },
+      "layer": [
+        {"mark": "line"},
+        {"mark": "point"}
+      ],
+      "width": 600,
+      "height": 400
+    },
+    "resolve": {
+      "scale": {"y": "independent"}
+    }
+  }

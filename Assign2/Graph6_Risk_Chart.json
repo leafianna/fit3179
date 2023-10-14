@@ -1,0 +1,18 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/TB_burden_age_sex_2023-09-28.csv",
+      "format": {"type": "csv"}
+    },
+    "transform": [
+      {"filter": "datum.year == 2021"},
+      {"filter": "datum.risk_factor !== 'all'"},
+      {"aggregate": [{"op": "sum", "field": "best", "as": "total_best"}], "groupby": ["risk_factor"]}
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {"field": "risk_factor", "type": "nominal", "title": "Risk Factor"},
+      "y": {"field": "total_best", "type": "quantitative", "title": "Number of Affected TB Cases"},
+      "color": {"field": "risk_factor", "type": "nominal", "title": "Risk Factor"}
+    }
+  }
