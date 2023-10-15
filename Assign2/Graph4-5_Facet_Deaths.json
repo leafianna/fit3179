@@ -1,33 +1,38 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data": {
-      "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/deaths_con_merged.csv",
-      "format": {
-        "type": "csv"
-      }
-    },
-    "transform": [
-      {
-        "aggregate": [{"op": "sum", "field": "Deaths", "as": "Total_Deaths"}],
-        "groupby": ["Continent", "Year"]
-      }
-    ],
-    "facet": {
-      "field": "Continent", "type": "nominal"
-  
-    },
-    "spec": {
-      "encoding": {
-        "x": {"field": "Year", "type": "temporal", "axis": {"title": "Year"}},
-        "y": {"field": "Total_Deaths", "type": "quantitative", "axis": {"title": "Total Deaths"}},
-        "color": {"field": "Continent", "type": "nominal", "title": "Continent"}
-      },
-      "layer": [
-        {"mark": "line"},
-        {"mark": "point"}
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/deaths_con_merged.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "aggregate": [{"op": "sum", "field": "Deaths", "as": "Total_Deaths"}],
+      "groupby": ["Continent", "Year"]
+    }
+  ],
+  "facet": {
+    "field": "Continent",
+    "type": "nominal"
+  },
+  "spec": {
+    "encoding": {
+      "x": {"field": "Year", "type": "temporal", "axis": {"title": "Year"}},
+      "y": {"field": "Total_Deaths", "type": "quantitative", "axis": {"title": "Total Deaths"}},
+      "color": {"field": "Continent", "type": "nominal", "title": "Continent"},
+      "tooltip": [
+        {"field": "Continent", "type": "nominal", "title": "Continent"},
+        {"field": "Year", "type": "temporal", "title": "Year"},
+        {"field": "Total_Deaths", "type": "quantitative", "title": "Total Deaths", "format": ",.0f"}
       ]
     },
-    "resolve": {
-      "scale": {"y": "independent"}
-    }
+    "layer": [
+      {"mark": "line"},
+      {"mark": "point"}
+    ]
+  },
+  "resolve": {
+    "scale": {"y": "independent"}
   }
+}

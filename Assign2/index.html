@@ -106,26 +106,48 @@
 
 
 
-  <!-- other variant-->
-  <!-- simplified code for line death graphs -->
-  <div>
-    <h2>Incidences of TB over time</h2>
-    <select id="viewSelect" onchange="changeView()">
-      <option value="main">Main View</option>
-      <option value="regional">Regional View</option>
-    </select>
-  </div>
+<!-- occurrences -->
+<div>
+  <h2>TB Occurrences over time</h2>
+  <select id="viewSelectOccurrences" onchange="changeViewOccurrences()">
+    <option value="main">Main View</option>
+    <option value="regional">Regional View</option>
+  </select>
+</div>
 
-  <div>
-    <div id="line_death_graph" class="vis-container" style="display: block;">
-      <!-- Your content for the main line death graph here -->
-      <h2>Main Line Death Graph</h2>
-    </div>
-    <div id="line_death_graph_facet" class="vis-container" style="display: none;">
-      <!-- Your content for the regional line death graph here -->
-      <h2>Regional Line Death Graph</h2>
-    </div>
+<div>
+  <div id="line_incident_graph" class="vis-container" style="display: block;">
+    <!-- Your content for the main line incident graph here -->
+    <h2>Main Line Occurrences Graph</h2>
   </div>
+  <div id="line_incident_graph_facet" class="vis-container" style="display: none;">
+    <!-- Your content for the regional line incident graph here -->
+    <h2>Regional Line Occurrences Graph</h2>
+  </div>
+</div>
+
+<div id="line_incident_graph_facet" class="vis-container"></div>
+
+
+<!-- deaths -->
+<div>
+  <h2>TB Deaths over time</h2>
+  <select id="viewSelectDeaths" onchange="changeViewDeaths()">
+    <option value="main">Main View</option>
+    <option value="regional">Regional View</option>
+  </select>
+</div>
+
+<div>
+  <div id="line_death_graph" class="vis-container" style="display: block;">
+    <!-- Your content for the main line death graph here -->
+    <h2>Main Line Death Graph</h2>
+  </div>
+  <div id="line_death_graph_facet" class="vis-container" style="display: none;">
+    <!-- Your content for the regional line death graph here -->
+    <h2>Regional Line Death Graph</h2>
+  </div>
+</div>
 
   
    <!-- risk chart -->
@@ -179,7 +201,7 @@
   <!-- <script src="vis1.js"></script> -->
 
   <script type="text/javascript">
-    var specVis1 = "Graph1.json";
+    var specVis1 = "Graph1-3_Fatality_Map.json";
     var specVis2 = "Graph2.json";
 
 
@@ -189,12 +211,16 @@
     var specVis4_5 = "Graph4-5_Facet_Deaths.json";
 
     // map graphs: incidence and death
-    var specVis1_5 = "Graph11.json";
-    var specVis1_6 = "Graph12.json";
+    var specVis1_5 = "Graph1-1_Incident_Map.json";
+    var specVis1_6 = "Graph1-2_Death_Map.json";
     // risk chart
     var specVis5 = "Graph6_Risk_Chart.json";
 
     var specVis6 = "Graph7_Global_Fund.json";
+
+    // incidence charts
+    var specVis7 = "Graph3_Incident_Line.json"
+    var specVis8 = "Graph3-5_Incident_Facet.json"
 
 
   vegaEmbed('#fatality_map', specVis1, { "actions": false }).then(function (result) {
@@ -224,10 +250,6 @@
     vegaEmbed('#line_death_graph_facet', specVis4_5, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
-
-    vegaEmbed('#line_death_graph_facet', specVis4_5, { "actions": false }).then(function (result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
     
     vegaEmbed('#risk_chart', specVis5, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
@@ -237,22 +259,47 @@
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-      // Initial display setup for the graphs
+    vegaEmbed('#line_incident_graph', specVis7, { "actions": false }).then(function (result) {
+  // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+vegaEmbed('#line_incident_graph_facet', specVis8, { "actions": false }).then(function (result) {
+  // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+
+ // Initial display setup for the graphs
+ document.getElementById('line_death_graph').style.display = 'block';
+  document.getElementById('line_death_graph_facet').style.display = 'none';
+
+  document.getElementById('line_incident_graph').style.display = 'block';
+  document.getElementById('line_incident_graph_facet').style.display = 'none';
+
+  function changeViewDeaths() {
+    var selectBox = document.getElementById("viewSelectDeaths");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+    if (selectedValue === "main") {
       document.getElementById('line_death_graph').style.display = 'block';
       document.getElementById('line_death_graph_facet').style.display = 'none';
-
-    function changeView() {
-      var selectBox = document.getElementById("viewSelect");
-      var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-
-      if (selectedValue === "main") {
-        document.getElementById('line_death_graph').style.display = 'block';
-        document.getElementById('line_death_graph_facet').style.display = 'none';
-      } else if (selectedValue === "regional") {
-        document.getElementById('line_death_graph').style.display = 'none';
-        document.getElementById('line_death_graph_facet').style.display = 'block';
-      }
+    } else if (selectedValue === "regional") {
+      document.getElementById('line_death_graph').style.display = 'none';
+      document.getElementById('line_death_graph_facet').style.display = 'block';
     }
+  }
+
+  function changeViewOccurrences() {
+    var selectBox = document.getElementById("viewSelectOccurrences");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+    if (selectedValue === "main") {
+      document.getElementById('line_incident_graph').style.display = 'block';
+      document.getElementById('line_incident_graph_facet').style.display = 'none';
+    } else if (selectedValue === "regional") {
+      document.getElementById('line_incident_graph').style.display = 'none';
+      document.getElementById('line_incident_graph_facet').style.display = 'block';
+    }
+  }
 
   </script>
 
