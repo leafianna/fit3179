@@ -1,0 +1,51 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/incidence_con.csv",
+      "format": {
+        "type": "csv",
+        "parse": {"Year": "date:%Y"}
+      }
+    },
+    "transform": [
+      {
+        "filter": "datum.Continent != 'NA'"
+      },
+      {
+        "aggregate": [{"op": "sum", "field": "Incidence_count_100k", "as": "Total_Count"}],
+        "groupby": ["Continent", "Year"]
+      }
+    ],
+    "facet": {
+      "field": "Continent",
+      "type": "nominal"
+    },
+    "spec": {
+      "layer": [
+        {
+          "mark": "line",
+          "encoding": {
+            "x": {"field": "Year", "type": "temporal", "axis": {"title": "Year"}},
+            "y": {"field": "Total_Count", "type": "quantitative", "axis": {"title": "Total Incidence Count per 100k"}},
+            "color": {"field": "Continent", "type": "nominal", "title": "Continent"}
+          }
+        },
+        {
+          "mark": "point",
+          "encoding": {
+            "x": {"field": "Year", "type": "temporal"},
+            "y": {"field": "Total_Count", "type": "quantitative"},
+            "color": {"field": "Continent", "type": "nominal"},
+            "tooltip": [
+              {"field": "Continent", "type": "nominal", "title": "Continent"},
+              {"field": "Year", "type": "temporal", "title": "Year"},
+              {"field": "Total_Count", "type": "quantitative", "title": "Total Count", "format": ",.0f"}
+            ]
+          }
+        }
+      ]
+    },
+    "resolve": {
+      "scale": {"y": "independent"}
+    }
+  }
