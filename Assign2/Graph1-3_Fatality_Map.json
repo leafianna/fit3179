@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Tuberculosis Fatality Rate (%)",
+  "title": "2021 Tuberculosis Fatality Rate (%)",
   "width": 800,
   "height": 400,
   "projection": {"type": "equalEarth"},

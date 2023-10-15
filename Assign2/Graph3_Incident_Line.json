@@ -30,7 +30,7 @@
         "tooltip": [
           {"field": "Continent", "type": "nominal", "title": "Continent"},
           {"field": "Year", "type": "temporal", "title": "Year"},
-          {"field": "Total_Count", "type": "quantitative", "title": "Total Count", "format": ",.0f"}
+          {"field": "Total_Count", "type": "quantitative", "title": "Total Count per 100,000 people", "format": ",.0f"}
         ]
       }
     }
