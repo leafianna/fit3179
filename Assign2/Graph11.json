@@ -32,7 +32,7 @@
             "color": {"field": "e_inc_num", "type": "quantitative", "title": "Incidence Numbers"},
             "tooltip": [
               {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-              {"field": "e_inc_num", "type": "quantitative", "title": "Incidence Numbers", "format": ".1r"}
+              {"field": "e_inc_num", "type": "quantitative", "title": "Incidence Numbers", "format": ",.0f"}
             ]
           }
       }
