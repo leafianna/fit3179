@@ -13,7 +13,8 @@
       }
     ],
     "facet": {
-      "row": {"field": "Continent", "type": "nominal"}
+      "field": "Continent", "type": "nominal"
+  
     },
     "spec": {
       "encoding": {

@@ -25,7 +25,15 @@
         for (var i = 0; i < graphs.length; i++) {
             graphs[i].style.display = 'none';
         }
-        document.getElementById('graph' + n).style.display = 'block';
+        for (var i = 1; i <= 3; i++) {
+            var button = document.getElementById('button' + i);
+            if (i === n) {
+                button.classList.add('pure-button-active');
+                document.getElementById('graph' + i).style.display = 'block';
+            } else {
+                button.classList.remove('pure-button-active');
+            }
+        }
     }
 </script>
 
@@ -73,10 +81,10 @@
   </div>
 
   <div>
-      <button onclick="showGraph(1)">Fatality Rate</button>
-      <button onclick="showGraph(2)">Incidences</button>
-      <button onclick="showGraph(3)">Deaths</button>
-  </div>
+    <a id="button1" class="pure-button" onclick="showGraph(1)">Fatality Rate</a>
+    <a id="button2" class="pure-button" onclick="showGraph(2)">Incidences</a>
+    <a id="button3" class="pure-button" onclick="showGraph(3)">Deaths</a>
+</div>
 
     
     <div><h2>TB Fatality</h2></div>
@@ -96,33 +104,66 @@
     </div>
   </div>
 
-  <!-- <div id="bubble_chart" class="vis-container"></div> -->
 
 
+  <!-- other variant-->
+  <!-- simplified code for line death graphs -->
+  <div>
+    <select id="viewSelect" onchange="changeView()">
+      <option value="main">Main View</option>
+      <option value="regional">Regional View</option>
+    </select>
+  </div>
 
-  <!-- <div id="line_graph" class="vis-container"></div> -->
-  <div class="pure-g">
-    <div class="pure-u-1 pure-u-md-2-3">
-      <div id="line_graph" class="vis-container"></div>
+  <div>
+    <div id="line_death_graph" class="vis-container" style="display: block;">
+      <!-- Your content for the main line death graph here -->
+      <h2>Main Line Death Graph</h2>
     </div>
-    <div class="pure-u-1 pure-u-md-1-3">
-      <div class="description description-left">
-        <h2>Lorem Ipsum</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
+    <div id="line_death_graph_facet" class="vis-container" style="display: none;">
+      <!-- Your content for the regional line death graph here -->
+      <h2>Regional Line Death Graph</h2>
     </div>
   </div>
+
+  
+   <!-- risk chart -->
+    <div> 
+      <h2>Common Risk Factors</h2>
+   <div class="pure-g">
+    <div class="pure-u-1-2">
+      <div class="description description-left">
+         <p> Risk factors include close contact with individuals with active TB, weakened immune systems due 
+        to conditions like HIV/AIDS, malnutrition, and chronic illnesses, as well as behavioral factors such as substance abuse and smoking. Age, homelessness, incarceration, travel to high-incidence areas, and previous incomplete TB treatment can also elevate the risk. Additionally, healthcare workers and individuals in healthcare settings with inadequate infection control may face increased exposure risk.
+         TB is a treatable disease, but awareness of these risk factors is crucial for prevention and early treatment.</p>
+      </div>
+    </div>
+    <div class="pure-u-1-2">
+      <div id="risk_chart" class="vis-container">
+    </div>
+  </div>
+</div>
+
+
 
   <!-- <script src="vis1.js"></script> -->
 
   <script type="text/javascript">
     var specVis1 = "Graph1.json";
     var specVis2 = "Graph2.json";
+
+
     var specVis3 = "Graph3.json";
 
+    var specVis4 = "Graph4_TB_deaths_Line.json";
+    var specVis4_5 = "Graph4-5_Facet_Deaths.json";
+
+    // map graphs: incidence and death
     var specVis1_5 = "Graph11.json";
     var specVis1_6 = "Graph12.json";
+    // risk chart
+    var specVis5 = "Graph6_Risk_Chart.json";
+
 
   vegaEmbed('#fatality_map', specVis1, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
@@ -144,7 +185,38 @@
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
+    vegaEmbed('#line_death_graph', specVis4, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
 
+    vegaEmbed('#line_death_graph_facet', specVis4_5, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#line_death_graph_facet', specVis4_5, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+    
+    vegaEmbed('#risk_chart', specVis5, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+      // Initial display setup for the graphs
+      document.getElementById('line_death_graph').style.display = 'block';
+      document.getElementById('line_death_graph_facet').style.display = 'none';
+
+    function changeView() {
+      var selectBox = document.getElementById("viewSelect");
+      var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+      if (selectedValue === "main") {
+        document.getElementById('line_death_graph').style.display = 'block';
+        document.getElementById('line_death_graph_facet').style.display = 'none';
+      } else if (selectedValue === "regional") {
+        document.getElementById('line_death_graph').style.display = 'none';
+        document.getElementById('line_death_graph_facet').style.display = 'block';
+      }
+    }
 
   </script>
 

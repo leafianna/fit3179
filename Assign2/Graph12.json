@@ -22,16 +22,20 @@
         }
       }
     ],
-    "mark": {"type": "geoshape"},
-    "encoding": {
-      "color": {
-        "field": "e_mort_num",
-        "type": "quantitative",
-        "title": "Mortality Numbers" 
-      },
-      "tooltip": [
-        {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-        {"field": "e_mort_num", "type": "quantitative", "title": "Mortality Numbers", "format": ".1r"} 
-      ]
-    }
-  }
+    "layer": [
+        {
+            "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "black", "strokeWidth": 0.5}
+        },
+        {
+            "mark": {"type": "geoshape"},
+            "encoding": {
+              "color": {"field": "e_mort_num", "type": "quantitative", "title": "Mortality Numbers"},
+              "tooltip": [
+                {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+                {"field": "e_mort_num", "type": "quantitative", "title": "Mortality Numbers", "format": ".1r"} 
+              ]
+            }
+        }
+    ]
+}
+
