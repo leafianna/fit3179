@@ -145,6 +145,24 @@
   </div>
 </div>
 
+   <!-- Funding chart -->
+   <div> 
+    <h2>Common Risk Factors</h2>
+ <div class="pure-g">
+  <div class="pure-u-1-2">
+    <div class="description description-left">
+       <p> Risk factors include close contact with individuals with active TB, weakened immune systems due 
+      to conditions like HIV/AIDS, malnutrition, and chronic illnesses, as well as behavioral factors such as substance abuse and smoking. Age, homelessness, incarceration, travel to high-incidence areas, and previous incomplete TB treatment can also elevate the risk. Additionally, healthcare workers and individuals in healthcare settings with inadequate infection control may face increased exposure risk.
+       TB is a treatable disease, but awareness of these risk factors is crucial for prevention and early treatment.</p>
+    </div>
+  </div>
+  <div class="pure-u-1-2">
+    <div id="fund_chart" class="vis-container">
+  </div>
+</div>
+</div>
+
+
     <!-- conclusion -->
     <div class="pure-g">
       <div class="pure-u-1-1">
@@ -176,6 +194,8 @@
     var specVis1_6 = "Graph12.json";
     // risk chart
     var specVis5 = "Graph6_Risk_Chart.json";
+
+    var specVis6 = "Graph7_Global_Fund.json";
 
 
   vegaEmbed('#fatality_map', specVis1, { "actions": false }).then(function (result) {
@@ -211,6 +231,10 @@
     }).catch(console.error);
     
     vegaEmbed('#risk_chart', specVis5, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#fund_chart', specVis6, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
