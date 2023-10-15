@@ -25,9 +25,7 @@
       "layer": [
         {"mark": "line"},
         {"mark": "point"}
-      ],
-      "width": 600,
-      "height": 400
+      ]
     },
     "resolve": {
       "scale": {"y": "independent"}
