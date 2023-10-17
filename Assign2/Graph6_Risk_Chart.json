@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 300,
+  "height": 200,
   "data": {
     "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/TB_burden_age_sex_2023-09-28.csv",
     "format": {"type": "csv"}
