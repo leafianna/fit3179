@@ -1,25 +1,42 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": "container",
-    "height": 300,
-    "data": {
-      "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/TB_budget_2023-10-15.csv",
-      "format": {"type": "csv"}
-    },
-    "transform": [
-      {"aggregate": [{"op": "sum", "field": "budget_tot", "as": "total_budget"}], "groupby": ["year"]},
-      {
-        "calculate": "datum.total_budget > 1000000000 ? format(datum.total_budget/1000000000, '.2f') + ' billion' : format(datum.total_budget/1000000, '.2f') + ' million'", 
-        "as": "formatted_total_budget"
-      }
-    ],
-    "mark": "bar",
-    "encoding": {
-      "x": {"field": "year", "type": "ordinal", "title": "Year"},
-      "y": {"field": "total_budget", "type": "quantitative", "title": "Total TB Expenditure (US Dollars)"},
-      "tooltip": [
-        {"field": "year", "type": "ordinal", "title": "Year"},
-        {"field": "formatted_total_budget", "type": "nominal", "title": "Total Budget"}
-      ]
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/leafianna/fit3179/main/Assign2/Data/TB_budget_2023-10-15.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {"aggregate": [{"op": "sum", "field": "budget_tot", "as": "total_budget"}], "groupby": ["year"]},
+    {
+      "calculate": "datum.total_budget > 1000000000 ? format(datum.total_budget/1000000000, '.2f') + ' billion' : format(datum.total_budget/1000000, '.2f') + ' million'",
+      "as": "formatted_total_budget"
     }
-  }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar", "color": "green"},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal", "title": "Year"},
+        "y": {"field": "total_budget", "type": "quantitative", "title": "Total TB Expenditure (US Dollars)"},
+        "tooltip": [
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "formatted_total_budget", "type": "nominal", "title": "Total Budget"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "baseline": "middle",
+        "dx": 5,
+        "dy": -5
+      },
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "total_budget", "type": "quantitative"},
+        "text": {"field": "formatted_total_budget", "type": "nominal"}
+      }
+    }
+  ]
+}

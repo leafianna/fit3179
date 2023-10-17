@@ -11,10 +11,25 @@
     {"filter": "datum.risk_factor !== 'all'"},
     {"aggregate": [{"op": "sum", "field": "best", "as": "total_best"}], "groupby": ["risk_factor"]}
   ],
-  "mark": "bar",
-  "encoding": {
-    "y": {"field": "risk_factor", "type": "nominal", "title": "Risk Factor"},
-    "x": {"field": "total_best", "type": "quantitative", "title": "Number of Affected TB Cases"},
-    "color": {"field": "risk_factor", "type": "nominal", "title": "Risk Factor"}
-  }
+  "layer": [
+    {
+      "mark": {"type": "bar", "color": "grey"},
+      "encoding": {
+        "y": {"field": "risk_factor", "type": "nominal", "title": "Risk Factor"},
+        "x": {"field": "total_best", "type": "quantitative", "title": "Number of Affected TB Cases"},
+        "tooltip": [
+          {"field": "risk_factor", "type": "nominal", "title": "Risk Factor"},
+          {"field": "total_best", "type": "quantitative", "title": "Total Best", "format": ".2s"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 3},
+      "encoding": {
+        "y": {"field": "risk_factor", "type": "nominal"},
+        "x": {"field": "total_best", "type": "quantitative"},
+        "text": {"field": "total_best", "type": "quantitative", "format": ".2s"}
+      }
+    }
+  ]
 }

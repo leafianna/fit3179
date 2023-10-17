@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Tuberculosis Incidence Numbers",
+  "title": "2021 Tuberculosis Incidence Count",
   "width": 800,
   "height": 400,
   "autosize": {"type": "fit", "contains": "padding"},
@@ -23,18 +23,18 @@
     }
   ],
   "layer": [
-      {
-          "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "black", "strokeWidth": 0.5}
-      },
-      {
-          "mark": {"type": "geoshape"},
-          "encoding": {
-            "color": {"field": "e_inc_num", "type": "quantitative", "title": "Incidence Numbers"},
-            "tooltip": [
-              {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-              {"field": "e_inc_num", "type": "quantitative", "title": "Incidence Numbers", "format": ",.0f"}
-            ]
-          }
+    {
+      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "black", "strokeWidth": 0.5}
+    },
+    {
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {"field": "e_inc_num", "type": "quantitative", "title": "Incidence Numbers", "scale": {"type": "log"}},
+        "tooltip": [
+          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+          {"field": "e_inc_num", "type": "quantitative", "title": "Incidence Numbers", "format": ",.0f"}
+        ]
       }
+    }
   ]
 }
